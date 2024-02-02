@@ -30,11 +30,11 @@ void AddNode(Data data,Linked_list* linked_list){
     newnode->data = data;
     newnode->prev = linked_list->current->prev;
     newnode->next = linked_list->current;
-
-    linked_list->current->prev = newnode;
     if(linked_list->current->prev != NULL){
         linked_list->current->prev->next = newnode;
     }
+    linked_list->current->prev = newnode;
+   
 }
 
 void DelNode(Linked_list* linked_list){
@@ -50,7 +50,7 @@ int main(){
     Linked_list_Init(linked_list);
 
     char inp[100000];
-    scanf("%s",inp);
+    fgets(inp,100000,stdin);
     printf("%s",inp);
 
     int i = 0;
@@ -61,10 +61,11 @@ int main(){
 
     int N = 0;
     scanf("%d",&N);
+    while(getchar()!='\n');
     printf("%d",N);
     for(int j =0;j<N;j++){
         char c[4];
-        scanf("%s",c);
+        fgets(c,3,stdin);
         while(getchar()!='\n');
         printf("%d",j);
         printf("%s",c);
