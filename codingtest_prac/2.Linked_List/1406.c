@@ -30,60 +30,58 @@ void AddNode(Data data,Linked_list* linked_list){
     newnode->data = data;
     newnode->prev = linked_list->current->prev;
     newnode->next = linked_list->current;
-    if(linked_list->current->prev != NULL){
-        linked_list->current->prev->next = newnode;
+    if(newnode->prev != NULL){
+        newnode->prev->next = newnode;
     }
+    newnode->next->prev = newnode;
+    
+    
     linked_list->current->prev = newnode;
    
 }
 
 void DelNode(Linked_list* linked_list){
-    Node* delNode = linked_list->current->prev;
-    delNode->prev->next = linked_list->current;
-    linked_list->current->prev = delNode->prev;
-
-    free(delNode); 
+    if(linked_list->current->prev != NULL){
+        Node* delNode = linked_list->current->prev;
+        if(delNode->prev != NULL){
+            delNode->prev->next = delNode->next;
+            delNode->next->prev = delNode->prev;
+        }
+        free(delNode); 
+    }
 }
 
 int main(){
     Linked_list* linked_list = (Linked_list*)malloc(sizeof(Linked_list));
     Linked_list_Init(linked_list);
 
-    char inp[100000];
-    fgets(inp,100000,stdin);
-    printf("%s",inp);
-
-    int i = 0;
-    while(inp[i] != '\0'){
-        AddNode(inp[i],linked_list);
-        i++;
+    char c;
+    while ((c = getchar()) != '\n'){
+		AddNode(c,linked_list);
     }
 
     int N = 0;
-    scanf("%d",&N);
-    while(getchar()!='\n');
-    printf("%d",N);
-    for(int j =0;j<N;j++){
-        char c[4];
-        fgets(c,3,stdin);
-        while(getchar()!='\n');
-        printf("%d",j);
-        printf("%s",c);
+    scanf("%d\n",&N);
 
-        if(c[0] == 'L'){
+    for(int j =0;j<N;j++){
+        scanf("%c ",&c);
+
+        if(c == 'L'){
             if(linked_list->current->prev != NULL){
                 linked_list->current = linked_list->current->prev;
             }
-        }else if(c[0] == 'D'){
+        }else if(c == 'D'){
             if(linked_list->current->next != NULL){
                 linked_list->current = linked_list->current->next;
             }
-        }else if(c[0] == 'B'){
+        }else if(c == 'B'){
             if(linked_list->current->prev != NULL){
                 DelNode(linked_list);
             }
-        }else if(c[0] == 'P'){
-            AddNode(c[1],linked_list);
+        }else if(c == 'P'){
+            char inp;
+            scanf(" %c",&inp);
+            AddNode(inp,linked_list);
         }
     }
 
