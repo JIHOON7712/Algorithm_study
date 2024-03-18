@@ -1,5 +1,6 @@
 #include<iostream>
 #include<queue>
+#include<vector>
 
 using namespace std;
 
@@ -10,44 +11,45 @@ using namespace std;
 int dx[4] = {1,0,-1,0};
 int dy[4] = {0,1,0,-1};
 
-queue<pair<int,int>> Q;
+vector<pair<int,int>> v;
+queue<pair<int,int>> tmp;
 
 void bfs(void){
-    int board[MAX][MAX] ={0,};
-    bool visited[MAX][MAX]= {false,};
-
     int N,M,count;
     cin >> N >> M >> count;
     for(int i = 0;i<count;i++){
         int a,b;
         cin >>a >>b;
-        board[a][b] = 1;
+        v.push_back(pair<int,int>({a,b}));
     }
+
     int bug = 0;
-    for(int i =0;i<N;i++){
-        for(int j=0;j<M;j++){
-            if(board[i][j] ==1 && visited[i][j] == false){
-                bug++;
-                Q.push(pair<int,int>({i,j}));
-                while(!Q.empty()){
-                    pair<int,int> cur = Q.front();
-                    Q.pop();
+    while(!v.empty()){
 
-                    visited[cur.x][cur.y] = true;
-                    for(int h =0;h<4;h++){
-                        int nx = cur.x + dx[h];
-                        int ny = cur.y + dy[h];
+        pair<int,int> cur = v.front();
+        v.erase(v.begin());
+        bug++;
+        tmp.push(cur);
+            while(!tmp.empty()){
+                pair<int,int> cur = tmp.front();
+                tmp.pop();
 
-                        if(nx < 0 || ny <0 || nx>=N || ny >= M) { continue;}
-                        if(board[nx][ny] ==1 && visited[nx][ny] ==false){
-                            Q.push(pair<int,int>({nx,ny}));
+                for(int h =0;h<4;h++){
+                    int nx = cur.x + dx[h];
+                    int ny = cur.y + dy[h];
+
+                    if(nx < 0 || ny <0 || nx>=N || ny >= M) { continue;}
+                    for(auto i = v.begin();i!=v.end();i++){
+                        if((*i).x == nx && (*i).y == ny ){ 
+                            tmp.push(*i);
+                            v.erase(i);
+                            break;
                         }
                     }
-
                 }
+
             }
         }
-    }
     cout << bug << endl;
 }
 
