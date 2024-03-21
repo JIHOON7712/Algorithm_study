@@ -37,22 +37,7 @@ void tomato(void){
                 q.push(pair<pair<int,int>,int>({{nz,nx},ny}));
             }
         }
-    }
-    int flag = 0;
-    for(int i =0 ;i<H;i++){
-        for(int j=0 ;j<N;j++){
-            for(int k=0;k<M;k++){
-                if(box[i][j][k] == 0) cout<< -1<<endl;
-                flag = 1;
-                break;
-            }
-        }
-    }
-    if(flag == 0){
-        if(max_times == 0) cout<<0<<endl;
-        else cout << max_times -1 <<endl;
-    }
-        
+    }    
 }
 
 int main(){
@@ -68,4 +53,15 @@ int main(){
     }
 
     tomato();
+
+    for(int i =0 ;i<H;i++){
+        for(int j=0 ;j<N;j++){
+            for(int k=0;k<M;k++){
+                if(box[i][j][k] == 0) cout<< -1<<endl;
+                return 0;
+            }
+        }
+    }
+
+    cout << max_times-1 <<endl;
 }
