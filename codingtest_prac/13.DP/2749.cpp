@@ -2,7 +2,7 @@
 using namespace std;
 
 int main(){
-    long n[91] = {0,};
+    long long n[91] = {0,};
     n[0] = 0;
     n[1] = 1;
 

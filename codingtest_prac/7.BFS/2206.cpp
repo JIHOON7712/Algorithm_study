@@ -6,15 +6,8 @@ using namespace std;
 #define MAX 1001
 
 string input[MAX];
-int matrix[MAX][MAX][2];
 
-typedef struct miro{
-    int x;
-    int y;
-    bool wall;
-}miro;
-
-queue<miro> q;
+queue<pair<int,int>> q;
 
 int dx[4] = {1,0,-1,0};
 int dy[4] = {0,1,0,-1};
