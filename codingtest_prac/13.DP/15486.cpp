@@ -6,6 +6,7 @@ using namespace std;
 vector<pair<int,int>> vec;
 int day,pay;
 
+bool visited[1500001]={0,};
 int main(void){
     int N;
     cin >> N;
@@ -15,5 +16,5 @@ int main(void){
         vec.push_back({day,pay});
     }
 
-    
+    for()
 }
